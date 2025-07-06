@@ -1,0 +1,25 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    environment:
+      TZ: 'Asia/Hong_Kong'
+    ports:
+      - "9443:9443"
+      - "8000:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - genysolnet
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+
+volumes:
+  portainer_data:
+
+networks:
+  genysolnet:
+    external: true
